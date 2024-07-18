@@ -94,7 +94,7 @@ public class CopycatHeadstockBlock extends WaterloggedCopycatBlock {
     public boolean isIgnoredConnectivitySide(BlockAndTintGetter reader, BlockState state, Direction face,
                                              BlockPos fromPos, BlockPos toPos) {
         Direction facing = state.getValue(FACING);
-        BlockState toState = reader.getBlockState(toPos);
+        BlockState toState = reader.getBlockState(toPos).setValue(STYLE, state.getValue(STYLE));
 
         BlockPos diff = fromPos.subtract(toPos);
         int coord = facing.getAxis()
@@ -113,7 +113,7 @@ public class CopycatHeadstockBlock extends WaterloggedCopycatBlock {
     @Override
     public boolean canConnectTexturesToward(BlockAndTintGetter reader, BlockPos fromPos, BlockPos toPos, BlockState state) {
         Direction facing = state.getValue(FACING);
-        BlockState toState = reader.getBlockState(toPos);
+        BlockState toState = reader.getBlockState(toPos).setValue(STYLE, state.getValue(STYLE));
 
         if (toPos.equals(fromPos.relative(facing)))
             return false;
